@@ -1,5 +1,5 @@
 import { motion } from "framer-motion";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { BsArrowUpRight, BsGithub } from "react-icons/bs";
 import Link from "next/link";
 import { Swiper, SwiperSlide } from "swiper/react";
@@ -68,6 +68,10 @@ const projects = [
 const Work = () => {
   const [project, setProject] = useState(projects[0]);
 
+  useEffect(() => {
+    setProject(projects[0]);
+  }, []);
+
   const handleSlideChange = (swiper) => {
     const currentIndex = swiper.activeIndex;
     setProject(projects[currentIndex]);
@@ -135,28 +139,24 @@ const Work = () => {
                 className="xl:h-[520px]"
                 onSlideChange={handleSlideChange}
               >
-                {projects.map((project, idx) => {
-                  return (
-                    <SwiperSlide key={idx} className="w-full">
-                      <div className="h-[460px] relative group flex justify-center items-center bg-pink-50/20">
-                        <div className="absolute top-0 bottom-0 w-full h-full bg-black/10 z-10"></div>
-                        <div className="relative h-full w-full">
-                          <Image
-                            src={project.image}
-                            fill
-                            className="object-cover"
-                            alt=""
-                          />
-                        </div>
+                {projects.map((project, idx) => (
+                  <SwiperSlide key={idx} className="w-full">
+                    <div className="h-[460px] relative group flex justify-center items-center bg-pink-50/20">
+                      <div className="absolute top-0 bottom-0 w-full h-full bg-black/10 z-10"></div>
+                      <div className="relative h-full w-full">
+                        <Image
+                          src={project.image}
+                          fill
+                          className="object-cover"
+                          alt={project.title}
+                        />
                       </div>
-                    </SwiperSlide>
-                  );
-                })}
+                    </div>
+                  </SwiperSlide>
+                ))}
                 <WorkSliderBtns
-                  containerStyles="flex gap-2 absolute left-0 bottom-[calc(50%_-_22px)]
-                xl:bottom-0 z-20 w-full justify-between xl:w-max xl:justify-none"
-                  btnStyles="bg-accent hover:bg-blue-600 text-primary text-[22px] w-[44px] h-[44px] flex
-                justify-center items-center transision-all"
+                  containerStyles="flex gap-2 absolute left-0 bottom-[calc(50%_-_22px)] xl:bottom-0 z-20 w-full justify-between xl:w-max xl:justify-none"
+                  btnStyles="bg-accent hover:bg-blue-600 text-primary text-[22px] w-[44px] h-[44px] flex justify-center items-center transition-all"
                 />
               </Swiper>
             </div>
