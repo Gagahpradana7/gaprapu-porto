@@ -26,9 +26,12 @@ const Home = () => {
             initial="hidden"
             animate="show"
             exit="hidden"
-            className="max-w-sm xl:max-w-xl mx-auto xl:mx-0 mb-10 xl:mb-16"
+            className="max-w-sm text-wrap text-sm xl:text-base xl:max-w-xl mx-auto xl:mx-0 mb-10 xl:mb-16"
           >
-            Lorem ipsum dolor sit amet consectetur adipisicing elit.
+            I am a Full Stack Developer eager to learn and grow in the tech
+            world. I love building functional and visually appealing web
+            applications. In my free time, I enjoy games, music, and movies,
+            which fuel my creativity and passion for tech.
           </motion.p>
           <div className="flex justify-center xl:hidden relative">
             <ProjectsBtn />
