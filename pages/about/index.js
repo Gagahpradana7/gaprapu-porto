@@ -1,5 +1,4 @@
 import react, { useState } from "react";
-
 import {
   FaHtml5,
   FaCss3,
@@ -27,6 +26,7 @@ import {
   SiGraphql,
   SiRedis,
 } from "react-icons/si";
+
 import Avatar from "../../components/Avatar";
 import Circles from "../../components/Circles";
 import { motion } from "framer-motion";
@@ -40,7 +40,7 @@ const aboutData = [
       {
         title: "Full Stack Developer",
         icons: [
-          <div className="text-xl flex gap-3">
+          <div key="fullstack-icons" className="text-xl flex gap-3">
             <FaJs />
             <FaHtml5 />
             <FaCss3 />
@@ -63,40 +63,40 @@ const aboutData = [
       {
         title: "Web Development",
         icons: [
-          <FaHtml5 />,
-          <FaCss3 />,
-          <FaJs />,
-          <FaReact />,
-          <SiNextdotjs />,
-          <SiBlogger />,
-          <FaWordpress />,
-          <SiMongodb />,
+          <FaHtml5 key="html5" />,
+          <FaCss3 key="css3" />,
+          <FaJs key="javascript" />,
+          <FaReact key="react" />,
+          <SiNextdotjs key="nextjs" />,
+          <SiBlogger key="blogger" />,
+          <FaWordpress key="wordpress" />,
+          <SiMongodb key="mongodb" />,
         ],
       },
       {
         title: "Front-End Dev",
         icons: [
-          <FaHtml5 />,
-          <FaCss3 />,
-          <FaReact />,
-          <SiNextdotjs />,
-          <SiAxios />,
-          <SiApollographql />,
+          <FaHtml5 key="frontend-html5" />,
+          <FaCss3 key="frontend-css3" />,
+          <FaReact key="frontend-react" />,
+          <SiNextdotjs key="frontend-nextjs" />,
+          <SiAxios key="frontend-axios" />,
+          <SiApollographql key="frontend-apollo" />,
         ],
       },
       {
         title: "Back-End Dev",
         icons: [
-          <SiNextdotjs />,
-          <SiExpress />,
-          <SiMongodb />,
-          <SiApollographql />,
-          <FaNodeJs />,
-          <SiSequelize />,
-          <SiPostgresql />,
-          <SiGraphql />,
-          <SiRedis />,
-          <FaAws />,
+          <SiNextdotjs key="backend-nextjs" />,
+          <SiExpress key="backend-express" />,
+          <SiMongodb key="backend-mongodb" />,
+          <SiApollographql key="backend-apollo" />,
+          <FaNodeJs key="backend-nodejs" />,
+          <SiSequelize key="backend-sequelize" />,
+          <SiPostgresql key="backend-postgresql" />,
+          <SiGraphql key="backend-graphql" />,
+          <SiRedis key="backend-redis" />,
+          <FaAws key="backend-aws" />,
         ],
       },
     ],
@@ -127,6 +127,7 @@ const aboutData = [
 
 const About = () => {
   const [idx, setIdx] = useState(0);
+
   return (
     <div className="h-full bg-primary/30 py-32 text-center xl:text-left">
       <Circles />
@@ -174,18 +175,18 @@ const About = () => {
           >
             <div className="flex flex-1 xl:gap-x-6">
               <div className="relative flex-1 after:w-[1px] after:h-full after:bg-white/10 after:absolute after:top-0 after:right-0">
-                <div className="text-2xl xl:text-4xl font-extrabold text-accent mb-2 ">
+                <div className="text-2xl xl:text-4xl font-extrabold text-accent mb-2">
                   <CountUp start={0} end={0} duration={5} /> +
                 </div>
-                <div className="text-xs uppercase tracking-[1px] leading-[1.4] max-w-[100px] ">
+                <div className="text-xs uppercase tracking-[1px] leading-[1.4] max-w-[100px]">
                   Years of experience
                 </div>
               </div>
               <div className="relative flex-1 ml-32">
-                <div className="text-2xl xl:text-4xl font-extrabold text-accent mb-2 ">
+                <div className="text-2xl xl:text-4xl font-extrabold text-accent mb-2">
                   <CountUp start={0} end={7} duration={10} /> +
                 </div>
-                <div className="text-xs uppercase tracking-[1px] leading-[1.4] max-w-[100px] ">
+                <div className="text-xs uppercase tracking-[1px] leading-[1.4] max-w-[100px]">
                   Finished Project
                 </div>
               </div>
@@ -200,48 +201,44 @@ const About = () => {
           className="flex flex-col w-full xl:max-w-[48%] h-[480px]"
         >
           <div className="flex gap-x-4 xl:gap-x-8 mx-auto xl:mx-0 mb-4">
-            {aboutData.map((item, itemIdx) => {
-              return (
-                <div
-                  key={itemIdx}
-                  className={`${
-                    idx === itemIdx &&
-                    `text-accent after:w-[100%] after:bg-accent after:transition-all after:duration-300`
-                  } cursor-pointer capitalize xl:text-lg relative after:w-8 after:h-[2px] 
-                  after:bg-white after:absolute after:-bottom-1 after:left-0`}
-                  onClick={() => setIdx(itemIdx)}
-                >
-                  {item.title}
-                </div>
-              );
-            })}
+            {aboutData.map((item, itemIdx) => (
+              <div
+                key={`about-item-${itemIdx}`}
+                className={`${
+                  idx === itemIdx &&
+                  `text-accent after:w-[100%] after:bg-accent after:transition-all after:duration-300`
+                } cursor-pointer capitalize xl:text-lg relative after:w-8 after:h-[2px] 
+                after:bg-white after:absolute after:-bottom-1 after:left-0`}
+                onClick={() => setIdx(itemIdx)}
+              >
+                {item.title}
+              </div>
+            ))}
           </div>
-          <div className=" py-2 xl:py-6 flex flex-col gap-y-2 xl:gap-y-4 items-center xl:items-start">
-            {aboutData[idx].info.map((item, itemIdx) => {
-              return (
-                <div
-                  key={itemIdx}
-                  className="flex-1 flex flex-col md:flex-row max-w-max gap-x-2 items-center text-white/70"
-                >
-                  <div className="font-light mb-2 md:mb-0">{item.title}</div>
-                  <div className="hidden md:flex">-</div>
-                  <div>{item.stage}</div>
-                  <div className="flex gap-x-4">
-                    {item.icons?.map((icon, itemIdx) => {
-                      return (
-                        <div className="text-2xl text-white" key={itemIdx}>
-                          {icon}
-                        </div>
-                      );
-                    })}
-                  </div>
+          <div className="py-2 xl:py-6 flex flex-col gap-y-2 xl:gap-y-4 items-center xl:items-start">
+            {aboutData[idx].info.map((item, itemIdx) => (
+              <div
+                key={`info-item-${itemIdx}`}
+                className="flex-1 flex flex-col md:flex-row max-w-max gap-x-2 items-center text-white/70"
+              >
+                <div className="font-light mb-2 md:mb-0">{item.title}</div>
+                <div className="hidden md:flex">-</div>
+                <div>{item.stage}</div>
+                <div className="flex gap-x-4">
+                  {item.icons?.map((icon, iconIdx) => (
+                    <div
+                      key={`icon-${iconIdx}`}
+                      className="text-2xl text-white"
+                    >
+                      {icon}
+                    </div>
+                  ))}
                 </div>
-              );
-            })}
+              </div>
+            ))}
           </div>
         </motion.div>
       </div>
-      <div></div>
     </div>
   );
 };
