@@ -9,6 +9,31 @@ import withReactContent from "sweetalert2-react-content";
 
 const MySwal = withReactContent(Swal);
 
+const sweetAlertConfig = {
+  success: {
+    background: "#1a1a1a",
+    color: "#ffffff",
+    icon: "success",
+    confirmButtonColor: "#3b82f6",
+    title: "Success!",
+    text: "Your message has been sent successfully.",
+  },
+  error: {
+    background: "#1a1a1a",
+    color: "#ffffff",
+    icon: "error",
+    confirmButtonColor: "#3b82f6",
+    title: "Error!",
+    text: "Failed to send message. Please try again.",
+  },
+  validation: {
+    background: "#1a1a1a",
+    color: "#ffffff",
+    icon: "warning",
+    confirmButtonColor: "#3b82f6",
+  },
+};
+
 const Contact = () => {
   const [formData, setFormData] = useState({
     name: "",
@@ -38,8 +63,76 @@ const Contact = () => {
     }));
   };
 
+  const validateForm = () => {
+    const { name, email, subject, message } = formData;
+
+    if (!name.trim()) {
+      MySwal.fire({
+        ...sweetAlertConfig.validation,
+        title: "Name Required",
+        text: "Please enter your name",
+      });
+      return false;
+    }
+
+    if (!email.trim()) {
+      MySwal.fire({
+        ...sweetAlertConfig.validation,
+        title: "Email Required",
+        text: "Please enter your email address",
+      });
+      return false;
+    }
+
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    if (!emailRegex.test(email)) {
+      MySwal.fire({
+        ...sweetAlertConfig.validation,
+        title: "Invalid Email",
+        text: "Please enter a valid email address",
+      });
+      return false;
+    }
+
+    if (!subject.trim()) {
+      MySwal.fire({
+        ...sweetAlertConfig.validation,
+        title: "Subject Required",
+        text: "Please enter a subject",
+      });
+      return false;
+    }
+
+    if (!message.trim()) {
+      MySwal.fire({
+        ...sweetAlertConfig.validation,
+        title: "Message Required",
+        text: "Please enter your message",
+      });
+      return false;
+    }
+
+    return true;
+  };
+
+  const showAlert = (config) => {
+    MySwal.fire({
+      ...config,
+      customClass: {
+        popup: "bg-gray-900 text-white",
+        confirmButton:
+          "bg-blue-500 hover:bg-blue-600 text-white px-4 py-2 rounded-lg",
+      },
+    });
+  };
+
   const handleSubmit = async (e) => {
     e.preventDefault();
+
+    if (!validateForm()) {
+      return;
+    }
+
     setIsSubmitting(true);
 
     try {
@@ -56,19 +149,11 @@ const Contact = () => {
       );
 
       console.log(result.text);
-      MySwal.fire({
-        icon: "success",
-        title: "Success!",
-        text: "Your message has been sent successfully.",
-      });
+      showAlert(sweetAlertConfig.success);
       setFormData({ name: "", email: "", subject: "", message: "" });
     } catch (error) {
       console.error("Error sending email:", error);
-      MySwal.fire({
-        icon: "error",
-        title: "Oops...",
-        text: "Failed to send message. Please try again.",
-      });
+      showAlert(sweetAlertConfig.error);
     } finally {
       setIsSubmitting(false);
     }
@@ -76,7 +161,7 @@ const Contact = () => {
 
   return (
     <div className="h-full">
-      <div className="container mx-auto py-32 text-center xl:text-left flex items-center justify-center h-full xl:p-0 p-8 xl:mt-0 mt-16">
+      <div className="container mx-auto py-32 text-center xl:text-left flex items-center justify-center h-full xl:p-0 p-8 xl:mt-0 mt-24">
         <div className="flex flex-col w-full max-w-[700px]">
           <motion.h2
             variants={fadeIn("down", 0.2)}
@@ -85,7 +170,10 @@ const Contact = () => {
             exit="hidden"
             className="h2 text-center mb-12 xl:text-6xl text-3xl"
           >
-            Let`s <span className="text-accent">work</span> together.
+            Let`s <span className="text-accent">connect.</span>
+            <p className="text-white xl:text-base text-sm xl:mt-8 mt-4">
+              Feel free to contact me, and I hope we can work together.
+            </p>
           </motion.h2>
 
           <motion.form
@@ -106,7 +194,7 @@ const Contact = () => {
                 onChange={handleInputChange}
               />
               <input
-                type="email"
+                type="text"
                 placeholder="Your Email"
                 className="input"
                 name="email"
@@ -129,11 +217,12 @@ const Contact = () => {
               value={formData.message}
               onChange={handleInputChange}
             ></textarea>
-            <div className="flex items-center w-full">
+            {/* Updated mobile responsive layout */}
+            <div className="flex flex-col sm:flex-row items-center w-full gap-6 sm:gap-0">
               <button
                 type="submit"
                 disabled={isSubmitting}
-                className="btn rounded-full border border-white/50 max-w-[170px] px-8 transition-all 
+                className="btn rounded-full border border-white/50 w-full sm:max-w-[170px] px-8 transition-all 
                 duration-300 flex items-center justify-center overflow-hidden hover:border-accent group"
               >
                 <span className="group-hover:-translate-y-[120px] group-hover:opacity-0 transition-all duration-500 text-sm">
@@ -144,12 +233,19 @@ const Contact = () => {
                   group-hover:flex group-hover:-translate-y-0 group-hover:opacity-100 transition-all duration-300 absolute text-[22px]"
                 />
               </button>
-              <div className="flex ml-auto space-x-8 items-center">
+              <div className="flex flex-col sm:flex-row sm:ml-auto gap-4 sm:gap-8 items-center w-full sm:w-auto">
                 {info.map((item, idx) => (
-                  <div key={idx} className="flex items-center gap-2">
-                    <div className="text-accent">{item.icon}</div>
+                  <div
+                    key={idx}
+                    className="flex items-center gap-2 text-sm sm:text-base"
+                  >
+                    <div className="text-accent text-lg sm:text-xl">
+                      {item.icon}
+                    </div>
                     <div>
-                      <p>{item.description}</p>
+                      <p className="break-all sm:break-normal">
+                        {item.description}
+                      </p>
                     </div>
                   </div>
                 ))}
