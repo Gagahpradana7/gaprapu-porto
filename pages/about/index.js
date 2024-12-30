@@ -145,7 +145,7 @@ const About = () => {
             initial="hidden"
             animate="show"
             exit="hidden"
-            className="h2 xl:mt-12 text-5xl"
+            className="h2 xl:mt-12 xl:text-5xl text-3xl"
           >
             Passionate <span className="text-accent">Developer</span> Ready to
             Take on New <span className="text-accent"> Challenges.</span>
@@ -198,7 +198,7 @@ const About = () => {
           initial="hidden"
           animate="show"
           exit="hidden"
-          className="flex flex-col w-full xl:max-w-[48%] h-[480px]"
+          className="flex flex-col w-full xl:max-w-[48%] h-[480px] xl:mt-0 mt-3"
         >
           <div className="flex gap-x-4 xl:gap-x-8 mx-auto xl:mx-0 mb-4">
             {aboutData.map((item, itemIdx) => (

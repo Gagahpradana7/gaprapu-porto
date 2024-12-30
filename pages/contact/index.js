@@ -161,7 +161,7 @@ const Contact = () => {
 
   return (
     <div className="h-full">
-      <div className="container mx-auto py-32 text-center xl:text-left flex items-center justify-center h-full xl:p-0 p-8 xl:mt-0 mt-24">
+      <div className="container mx-auto xl:py-32 py-10 text-center xl:text-left flex items-center justify-center h-full xl:p-0 p-8 xl:mt-0 mt-24">
         <div className="flex flex-col w-full max-w-[700px]">
           <motion.h2
             variants={fadeIn("down", 0.2)}
@@ -217,8 +217,8 @@ const Contact = () => {
               value={formData.message}
               onChange={handleInputChange}
             ></textarea>
-            {/* Updated mobile responsive layout */}
-            <div className="flex flex-col sm:flex-row items-center w-full gap-6 sm:gap-0">
+
+            <div className="flex flex-col sm:flex-row items-center w-full gap-6 sm:gap-0 xl:mb-0 mb-16">
               <button
                 type="submit"
                 disabled={isSubmitting}
