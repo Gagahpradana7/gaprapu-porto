@@ -137,8 +137,8 @@ const Contact = () => {
 
     try {
       const result = await emailjs.send(
-        "service_jx8bqgn",
-        "template_v0ptz7g",
+        process.env.NEXT_PUBLIC_EMAILJS_SERVICE,
+        process.env.NEXT_PUBLIC_EMAILJS_TEMPLATE,
         {
           from_name: formData.name,
           from_email: formData.email,

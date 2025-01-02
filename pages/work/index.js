@@ -63,6 +63,22 @@ const projects = [
     live: "https://fitmate-six.vercel.app/",
     github: "",
   },
+  {
+    num: "04",
+    title: "Gaprapu3D-Portfolio",
+    category: "Web",
+    description:
+      "A modern portfolio website featuring interactive 3D designs and a fully responsive layout. Users can explore projects presented in immersive 3D environments, with smooth transitions and animations. The portfolio adapts seamlessly to any device, offering an engaging experience whether on desktop or mobile.",
+    stack: [
+      { name: "React JS" },
+      { name: "Tailwind CSS" },
+      { name: "Next.JS" },
+      { name: "Three JS" },
+    ],
+    image: "/gaprapu3d.png",
+    live: "https://gaprapu3d-porto.vercel.app/",
+    github: "https://github.com/Gagahpradana7/Gaprapu3D-Porto",
+  },
 ];
 
 const Work = () => {

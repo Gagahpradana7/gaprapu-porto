@@ -32,7 +32,7 @@ const Photo = () => {
         <div className="relative w-[470px] h-[470px] rounded-full overflow-hidden shadow-xl mt-12">
           <div className="absolute inset-1 bg-gradient-to-b from-gray-950/50 to-gray-950/85" />
           <Image
-            src={"/profileG.png"}
+            src={"/playerAvatar1.png"}
             priority
             quality={100}
             width={470}
